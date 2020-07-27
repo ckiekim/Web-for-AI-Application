@@ -1,16 +1,20 @@
 from flask import Flask, render_template, request
+from werkzeug import secure_filename
 import os
 import joblib
 import numpy as np
 import pandas as pd
 import re
+from PIL import Image
 from konlpy.tag import Okt
 from tensorflow import keras
 from keras.models import load_model
+from keras.applications.vgg16 import VGG16, decode_predictions
 
 app = Flask(__name__)
 app.debug = True
 
+vgg = VGG16()
 okt = Okt()
 movie_lr = None
 movie_lr_dtm = None
@@ -91,9 +95,24 @@ def sentiment():
         movie = {'review':review, 'result_lr':result_lr, 'result_nb':result_nb}
         return render_template('senti_result.html', menu=menu, movie=movie)
 
-@app.route('/classification')
+@app.route('/classification', methods=['GET', 'POST'])
 def classification():
-    pass
+    menu = {'home':False, 'rgrs':False, 'stmt':False, 'clsf':True, 'clst':False, 'user':False}
+    if request.method == 'GET':
+        return render_template('classification.html', menu=menu)
+    else:
+        f = request.files['image']
+        filename = os.path.join(app.root_path, 'static/images/uploads/') + \
+                    secure_filename(f.filename)
+        f.save(filename)
+        img = np.array(Image.open(filename).resize((224, 224)))
+        yhat = vgg.predict(img.reshape(-1, 224, 224, 3))
+        label_key = np.argmax(yhat)
+        label = decode_predictions(yhat)
+        label = label[0][0]
+        return render_template('cla_result.html', menu=menu,
+                                filename = secure_filename(f.filename),
+                                name=label[1], pct='%.2f' % (label[2]*100))
 
 @app.route('/classification_iris', methods=['GET', 'POST'])
 def classification_iris():
