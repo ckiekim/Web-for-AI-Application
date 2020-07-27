@@ -31,6 +31,14 @@ def sentiment():
 def classification():
     pass
 
+@app.route('/classification_iris', methods=['GET', 'POST'])
+def classification_iris():
+    menu = {'home':False, 'rgrs':False, 'stmt':False, 'clsf':True, 'clst':False, 'user':False}
+    if request.method == 'GET':
+        return render_template('classification_iris.html', menu=menu)
+    else:
+        pass
+
 @app.route('/clustering')
 def clustering():
     pass

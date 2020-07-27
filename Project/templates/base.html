@@ -47,9 +47,17 @@
                         <a class="nav-link {% if menu.stmt %}active{% endif %}" 
                         href="{% if menu.stmt %}#{% else %}/sentiment{% endif %}">감성분석</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link {% if menu.clsf %}active{% endif %}" 
                         href="{% if menu.clsf %}#{% else %}/classification{% endif %}">분류</a>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if menu.clsf %}active{% endif %}" 
+                           data-toggle="dropdown" href="#">분류</a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/classification_iris">아이리스 분류</a>
+                        <a class="dropdown-item" href="#">이미지 분류</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if menu.clst %}active{% endif %}" 
