@@ -162,4 +162,4 @@ if __name__ == '__main__':
     load_movie_lr()
     load_movie_nb()
     load_iris()
-    app.run()
+    app.run(host='0.0.0.0')     # 외부 접속 허용시 host='0.0.0.0' 추가
