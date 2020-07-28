@@ -152,6 +152,12 @@ def clustering():
         mtime = int(os.stat(img_file).st_mtime)
         return render_template('clu_result.html', menu=menu, K=ncls, mtime=mtime)
 
+@app.route('/member/<name>')
+def member(name):
+    menu = {'home':False, 'rgrs':False, 'stmt':False, 'clsf':False, 'clst':False, 'user':True}
+    nickname = request.args.get('nickname', '별명: 없음')
+    return render_template('user.html', menu=menu, name=name, nickname=nickname)
+
 if __name__ == '__main__':
     load_movie_lr()
     load_movie_nb()

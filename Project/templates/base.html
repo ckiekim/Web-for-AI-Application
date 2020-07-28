@@ -60,11 +60,10 @@
                         href="{% if menu.clst %}#{% else %}/clustering{% endif %}">군집화</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">팀 멤버</a>
+                        <a class="nav-link dropdown-toggle {% if menu.user %}active{% endif %}" data-toggle="dropdown" href="#">팀 멤버</a>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">김태균</a>
-                        <a class="dropdown-item" href="#">이용규</a>
-                        <a class="dropdown-item" href="#">김민우</a>
+                        <a class="dropdown-item" href="/member/관리자?nickname=최강 동안미모">관리자</a>
+                        <a class="dropdown-item" href="/member/홍길동">홍길동</a>
                         </div>
                     </li>
                 </ul>

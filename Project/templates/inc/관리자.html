@@ -1,0 +1,143 @@
+<div class="row">
+    <div class="col-3">
+        <!-- 사진 영역 -->
+        <img src="{{url_for('static', filename='images/member/KSH.jpg')}}" width="200px">
+    </div>
+    <div class="col-8">
+        <br>
+        <!-- content -->
+        컴퓨터 공학과를 졸업하고 개발👩‍💻에 관심이 많습니다!<br>
+        스케이트보드🛹와 자전거🚲 타는 것을 좋아하고<br>
+        도넛을 굉장히 좋아해 한 달에 한번 신메뉴가 나오면 꼭 먹는 &lt;🍩도넛 모임🍩&gt;을<br>
+        하고 있습니다.<br><br>
+        <!-- <button type="button" class="btn btn-success" onclick="location.href='KimSohyunQuiz.html'">Quiz</button> -->
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-success" data-toggle="modal"
+            data-target="#myModal">Quiz</button>
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Quiz</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form>
+                            <h4>Q1. 요즘 관심 있는 취미는? </h4>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" value="Q1_a1"
+                                        name="optradio1">베이킹&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q1_a2"
+                                        name="optradio1">영화보기&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q1_a3"
+                                        name="optradio1">자수&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q1_a4"
+                                        name="optradio1">뜨개질
+                                </label>
+                            </div>
+                            <br><br><br>
+                            <h4>Q2. 밴드부에서 맡았던 악기는 ? </h4>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" value="Q2_a1"
+                                        name="optradio2">피아노&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q2_a2"
+                                        name="optradio2">일렉기타&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q2_a3"
+                                        name="optradio2">베이스&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q2_a4"
+                                        name="optradio2">드럼
+                                </label>
+                            </div>
+                            <br><br><br>
+                            <h4>Q3. 가장 좋아하는 색깔은? </h4>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" value="Q3_a1"
+                                        name="optradio3">빨강&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q3_a2"
+                                        name="optradio3">초록&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q3_a3"
+                                        name="optradio3">보라&nbsp;
+                                    <input type="radio" class="form-check-input" value="Q3_a4"
+                                        name="optradio3">핑크
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="myFucntion()">정답확인</button>
+                        <script>
+                            function myFucntion() {
+                                var CorrectCount = 0;
+                                var mySel1 = document.getElementsByName("optradio1");
+                                for (var i = 0; i < mySel1.length; i++) {
+                                    if (mySel1[2].checked == true) {
+                                        CorrectCount++;
+                                    }
+                                }
+                                var mySel2 = document.getElementsByName("optradio2");
+                                for (var i = 0; i < mySel2.length; i++) {
+                                    if (mySel2[2].checked == true) {
+                                        CorrectCount++;
+                                    }
+                                }
+                                var mySel3 = document.getElementsByName("optradio3");
+                                for (var i = 0; i < mySel3.length; i++) {
+                                    if (mySel3[1].checked == true) {
+                                        CorrectCount++;
+                                    }
+                                }
+                                if (CorrectCount == 12) {
+                                    alert("정답입니다!!");
+                                } else {
+                                    alert("오답입니다!!");
+                                }
+                            }
+                        </script>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-1">
+        <!-- etc -->
+    </div>
+</div>
+<br>
+<h3>✉️ Contact Me</h3>
+<p style="font-size: 20px;">&nbsp;&nbsp;&nbsp;이메일 : sosso555@naver.com
+    <br>&nbsp;&nbsp;&nbsp;github : https://github.com/sohyunk <a href="https://github.com/sohyunk"><img
+            src="{{url_for('static', filename='images/member/GitHub-Mark-32px.png')}}"></a></p>
+<br>
+<h5><i class="fas fa-school"></i> 학력 사항</h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>학교</th>
+            <th>전공</th>
+            <th>기간</th>
+            <th>졸업여부</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ㅇㅇ대학교</td>
+            <td>조명인테리어과</td>
+            <td>2014.03 ~ 2016.02</td>
+            <td>졸업</td>
+        </tr>
+        <tr>
+            <td>ㅇㅇ대학교</td>
+            <td>컴퓨터공학과</td>
+            <td>2018.03 ~ 2020.02</td>
+            <td>졸업</td>
+        </tr>
+    </tbody>
+</table>
