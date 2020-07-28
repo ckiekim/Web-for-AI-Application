@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
-import os
-import joblib
+import os, re, joblib
 import numpy as np
 import pandas as pd
-import re
 from PIL import Image
 from konlpy.tag import Okt
 from tensorflow import keras
@@ -162,4 +160,4 @@ if __name__ == '__main__':
     load_movie_lr()
     load_movie_nb()
     load_iris()
-    app.run(host='0.0.0.0')     # 외부 접속 허용시 host='0.0.0.0' 추가
+    app.run()     # 외부 접속 허용시 host='0.0.0.0' 추가
