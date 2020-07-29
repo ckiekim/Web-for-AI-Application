@@ -9,9 +9,12 @@ from tensorflow import keras
 from keras.models import load_model
 from keras.applications.vgg16 import VGG16, decode_predictions
 from Project.clu_util import cluster_util   # app.py와 __init__.py에서 다름
+from Project.mnist_util import mnist_util
+import keras.backend.tensorflow_backend as tb
+tb._SYMBOLIC_SCOPE.value = True
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 
 vgg = VGG16()
 okt = Okt()
@@ -51,6 +54,11 @@ def load_iris():
     model_iris_svm = joblib.load(os.path.join(app.root_path, 'model/iris_svm.pkl'))
     model_iris_dt = joblib.load(os.path.join(app.root_path, 'model/iris_dt.pkl'))
     model_iris_deep = load_model(os.path.join(app.root_path, 'model/iris_deep.hdf5'))
+
+model_mnist = None
+def load_mnist():
+    global model_mnist
+    model_mnist = load_model(os.path.join(app.root_path, 'model/mnist-cnn.hdf5'))
 
 @app.route('/')
 def index():
@@ -134,6 +142,22 @@ def classification_iris():
                 'species_dt':species_dt, 'species_deep':species_deep}
         return render_template('cla_iris_result.html', menu=menu, iris=iris)
 
+@app.route('/classification_mnist', methods=['GET', 'POST'])
+def classification_mnist():
+    menu = {'home':False, 'rgrs':False, 'stmt':False, 'clsf':True, 'clst':False, 'user':False}
+    if request.method == 'GET':
+        return render_template('classification_mnist.html', menu=menu)
+    else:
+        idx1 = int(request.form['idx1'])
+        idx2 = int(request.form['idx2'])
+        idx3 = int(request.form['idx3'])
+        indices = [idx1, idx2, idx3]
+        results, values = mnist_util(app, model_mnist, indices)
+        mnist_file = os.path.join(app.root_path, 'static/images/mnist1.png')
+        mtime = int(os.stat(mnist_file).st_mtime)
+        return render_template('cla_mnist_result.html', menu=menu, mtime=mtime,
+                                indices=indices, results=results, values=values)
+
 @app.route('/clustering', methods=['GET', 'POST'])
 def clustering():
     menu = {'home':False, 'rgrs':False, 'stmt':False, 'clsf':False, 'clst':True, 'user':False}
@@ -168,4 +192,5 @@ def shutdown():
     load_movie_lr()
     load_movie_nb()
     load_iris()
+    load_mnist()
     app.run() '''     # 외부 접속 허용시 host='0.0.0.0' 추가

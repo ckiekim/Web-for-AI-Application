@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block subtitle %}
+    <strong>MNIST 손글씨 분류</strong> - <small>결과</small>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-11">
+            <table class="table">
+                <tr>
+                    <td>Test Set Index</td>
+                    {% for index in indices %}
+                        <td style="text-align: center;">{{index}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    {% for index in indices %}
+                    <td style="text-align: center;">
+                        <img src="{{url_for('static', filename='images/mnist'+(loop.index|string())+'.png', q=mtime)}}" alt="">
+                    </td>
+                    {% endfor %}
+                </tr>
+                <tr class="alert alert-warning">
+                    <td><strong>예측치</strong></td>
+                    {% for result in results %}
+                        <td style="text-align: center;"><strong>{{result}}</strong></td>
+                    {% endfor %}
+                </tr>
+                <tr class="alert alert-info">
+                    <td>실제값</td>
+                    {% for value in values %}
+                        <td style="text-align: center;">{{value}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: center;">
+                        <button class="btn btn-primary"
+                                onclick="location.href='/classification_mnist'">재실행</button>
+                    </td>
+                </tr>
+            </table>		
+        </div>
+        <div class="col-1"></div>
+    </div>                
+{% endblock %}

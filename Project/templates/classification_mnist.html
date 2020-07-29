@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block subtitle %}
+    <strong>분류</strong> - <small>MNIST 손글씨 분류</small>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-6">
+            <form action="/classification_mnist" method="POST">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Test Set Index 1</td>
+                        <td><input type="text" id="idx1" class="form-control" 
+                            placeholder="1~10000 사이의 정수값" name="idx1"></td>
+                    </tr>
+                    <tr>
+                        <td>Test Set Index 2</td>
+                        <td><input type="text" id="idx2" class="form-control" 
+                            placeholder="1~10000 사이의 정수값" name="idx2"></td>
+                    </tr>
+                    <tr>
+                        <td>Test Set Index 3</td>
+                        <td><input type="text" id="idx3" class="form-control" 
+                            placeholder="1~10000 사이의 정수값" name="idx3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button class="btn btn-warning"
+                                    onclick="generate_index()">자동입력</button>&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary">실행</button>&nbsp;&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-secondary">취소</button>
+                        </td>
+                    </tr>
+                </table>		
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>                
+{% endblock %}
+{% block addition %}
+    <script>
+        function generate_index() {
+            document.getElementById('idx1').value = Math.floor(Math.random() * 10000);
+            document.getElementById('idx2').value = Math.floor(Math.random() * 10000);
+            document.getElementById('idx3').value = Math.floor(Math.random() * 10000);
+        }
+    </script>
+{% endblock %}
